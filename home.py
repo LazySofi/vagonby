@@ -54,6 +54,8 @@ with tab1:
         else:
             df = df[(df['Грузоподъёмность']>=carrying[0]) & (df['Грузоподъёмность']<=carrying[1])]
         
+        st.caption(f'Найдено записей: {str(len(df))}')
+
         df_button = st.data_editor(df, use_container_width=True, hide_index=True,
                 column_config = {
                     'Год начала серийного производства': st.column_config.NumberColumn(label='Начало выпуска', format='%d', width='medium'),
@@ -66,7 +68,7 @@ with tab1:
                 )
     except:
         st.write('**Вагоны не найдены**')
-    st.caption('Поиск работает только по полному и частичному заголовку (%mask%)')
+    st.caption('Поиск работает по полному и частичному заголовку (%mask%)')
     st.caption('Можно добавить фильтры объем, года и т.д.')
 
 
