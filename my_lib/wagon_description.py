@@ -10,7 +10,7 @@ def wagon_description(model = '11-5225', model_number = '2016'):
 
     st.header(f'Модель {model} {model_number}')
     st.subheader('Технические характеристики вагона')
-    cols = ls.get_column_headers(ls.engine)
+    cols = ls.Vagon.get_column_headers(ls.engine)
     cols.remove('id')
     cols.remove('gr_vagon')
 
