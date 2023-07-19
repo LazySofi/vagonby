@@ -52,8 +52,7 @@ def wagon_description_all(models = []):
             q = session.query(ls.Vagon).filter(ls.Vagon.model == model, ls.Vagon.model_number==model_number).first()
             for col in cols:
                 attr = getattr(q, col)
-                if not pd.isnull(attr):
-                    wagon[col]=[attr]
+                wagon[col]=[attr]
         df = pd.DataFrame.from_dict(wagon).rename(columns={'model': 'Модель', 'model_number': 'Номер модели', 'name': 'Наименование'})
         for i in ['Номер модели', 'Год начала серийного производства', 'Год окончания серийного производства']:
             if i in df.columns and df[i].dtypes == float:
@@ -61,8 +60,12 @@ def wagon_description_all(models = []):
 
         dfs.append(df)
     df = pd.concat(dfs, ignore_index=True)
+    ids = len(df)
+    cols = df.columns
+    for col in cols:
+        if df[col].isna().sum()==ids:
+            df = df.drop([col], axis=1)
     df = df.T
-    #st.write(df)
     df.reset_index(inplace=True)
     style = df.style.apply(color_rows, axis=1).hide(axis=0)
     style.hide(axis=1)
