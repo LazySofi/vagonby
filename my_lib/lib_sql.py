@@ -7,7 +7,7 @@ engine = create_engine('sqlite:///test.db')
 Base = declarative_base()
 
 class Vagon(Base):
-    __table__ = Table('vagon', Base.metadata, autoload=True, autoload_with=engine)
+    __table__ = Table('vagon', Base.metadata)
     id = __table__.c['index']
     model = __table__.c['Модель']
     model_number = __table__.c['Номер модели']
