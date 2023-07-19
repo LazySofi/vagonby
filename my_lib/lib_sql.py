@@ -8,6 +8,7 @@ Base = declarative_base()
 
 class Vagon(Base):
     __table__ = Table('vagon', Base.metadata)
+    Table('vagon', Base.metadata, autoload_with=engine, extend_existing=True)
     id = __table__.c['index']
     model = __table__.c['Модель']
     model_number = __table__.c['Номер модели']
